@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: flow-control
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE:dev}
+  cloud:
+    # nacos configuration
+    nacos:
+      config:
+        server-addr: ${NACOS_SERVER_ADDR:nacos.tonyiscoding.top}:${NACOS_SERVER_PORT:8848}
+        file-extension: yml
+        group: ${NACOS_CONFIG_GROUP:DEFAULT_GROUP}
+        namespace: ${NACOS_NAMESPACE:d0e8196d-4b75-47d9-9a15-809a59ae7243}
+      discovery:
+        server-addr:  ${NACOS_SERVER_ADDR:nacos.tonyiscoding.top}:${NACOS_SERVER_PORT:8848}
+        namespace: ${NACOS_NAMESPACE:d0e8196d-4b75-47d9-9a15-809a59ae7243}
+
+    # sentinel dashboard configuration
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:9100
+      eager: true #取消控制台懒加载
+
+server:
+  port: 18001
+management:
+  endpoints:
+    web: #将所有可用的监控指标项对外暴露
+      exposure: #可以访问 /actuator/sentinel进行查看Sentinel监控项
+        include: '*'
+
+logging:
+  level: debug

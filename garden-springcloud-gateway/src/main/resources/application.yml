@@ -1,0 +1,24 @@
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: echo
+#          uri: http://127.0.0.1:18001
+#          predicates:
+#            - Path=/echo/**
+#          filters:
+#            - StripPrefix=1
+#            - PrefixPath=/api
+#
+#        - id: fusing_testring
+#          uri: http://127.0.0.1:18001
+#          order: 0
+#          predicates:
+#            - Path=/echo/**
+#          filters:
+#            - StripPrefix=1
+#            - PrefixPath=/api
+#            - name: Hystrix
+#              args:
+#                name: fallbackCmdA
+#                fallbackUri: forward:/fusing_error
