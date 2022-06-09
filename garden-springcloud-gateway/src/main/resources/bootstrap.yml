@@ -5,7 +5,6 @@ spring:
     name: gateway
   profiles:
     active: ${SPRING_PROFILE_ACTIVE:dev}
-
   cloud:
     nacos:
       config:
